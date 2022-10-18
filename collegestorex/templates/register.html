@@ -1,0 +1,21 @@
+{% load static %}
+
+{%  block title  %}
+    Register here . . .
+{% endblock %}
+<br>
+<hr>
+<br>
+{% block content %}
+<body  style=" background-color: #02d1df;">
+
+<form action="register" method="POST">
+    {% csrf_token %}
+    <label> Name <input type="text"  name="username" placeholder="Enter name"></label>
+    <label> Password <input type="password"  name='password'  placeholder="create password"></label>
+    <label> Password again<input type="password" name="passworda" placeholder="Confirm password"></label>
+    <button type="submit"> Register</button>
+</form>
+
+{% endblock %}
+</body>

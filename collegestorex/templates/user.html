@@ -1,0 +1,18 @@
+{%  load static %}
+{%  block title  %}
+    Login
+{% endblock  %}
+
+<body style="background-image: url({% static  'img/log.jpg' %}); width: 600px; height: 100%; margin:20rem 20rem 20rem 20rem;;text-align: center;justify-items: center; font-size: 40px; margin:5px auto;'">
+{%  block content  %}
+<br>
+<br>
+<form action="login" method = "POST" >
+    {%  csrf_token  %}
+    <input type = 'text' name = "username" placeholder=" Enter username"><br>
+    <input type = 'password' name="password" placeholder="Enter password"><br>
+    <hr>
+    <button type="submit"> Login </button>
+</form>
+{%  endblock  %}
+</body>

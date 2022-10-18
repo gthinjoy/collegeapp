@@ -1,0 +1,144 @@
+{%  extends 'base.html'  %}
+{%  load static  %}
+<style>
+    .form-content{
+    padding: 20px 40px;
+    margin: 10px auto;
+    display: border-box;
+    border-radius: 5px;
+    border: 2px solid yellow;
+    height: 100%;
+    width: 50%;
+    justify-items: center;
+    position: relative;
+    background-color: #0f056e;
+    color: yellow;
+
+    }
+</style>
+{% block title %}
+   <h4 style = "text-align:center;"> Fill this form to continue</h4>
+{%  endblock  %}
+
+{%  block content  %}
+
+<body  style="color:yellow;">
+<form action="form" method = "POST" class="form-content" style="color:yellow; margin: 20px auto; padding: 30px 40px 50px 40px;">
+    {%  csrf_token  %}
+    <input type = "text" name="firstname" placeholder=" Enter firstname"><br><br>
+    <input type = "text"  name=" lastname" placeholder="Enter lastname"><br><br>
+    <input type="date" name="dateofbirth" placeholder="your birthday"><br><br>
+    <input type="number" name="age" placeholder="Enter age"><br><br>
+    <label> <input type="radio" id="choice1" value="male" name="this"> Male </label><br><br>
+    <label> <input type="radio" id="choice2" value="female" name="this"> Female </label><br><br>
+    <label> <input type="radio" id="choice3" value="value" name="this"> prefer not to say </label><br><br>
+    <input type="tel" name="phone" placeholder="Enter phone number"><br><br>
+    <input type="text" name="address" placeholder="Enter your address"><br><br>
+
+
+    Department: <select name="subject" id="subject">
+    <option value="" selected="selected">Select department</option>
+  </select>
+  <br><br>
+  Courses: <select name="topic" id="topic">
+    <option value="" selected="selected">Please select department first</option>
+  </select>
+  <br><br>
+  Course code: <select name="chapter" id="chapter">
+    <option value="" selected="selected">Please select course first</option>
+  </select>
+  <br><br>
+
+
+    Purpose: <select name="purpose" id="purpose">
+    <option value="" selected="selected">Enquiry</option>
+    <option value="" selected="selected">Order</option>
+    <option value="" selected="selected">Return</option>
+    <option value="" selected="selected">Exam</option>
+</select><br><br>
+   Materials provide:<br>
+    <label><input type="checkbox"  value="material" name="notebook">Notebook</label><br>
+    <label><input type="checkbox"  value="material" name="textbook">Textbook</label><br>
+    <label><input type="checkbox"  value="material" name="pen">Pen & Paper</label><br>
+    <label><input type="checkbox"  id="material" name="equipments">Equipments</label><br><br>
+
+    <input type="submit">
+
+
+    </form>
+
+<script>
+    var subjectObject = {
+    "CSE": {
+    "DSA": ["CS205" , "CS201", "MA201", "CS204", "CS208", "CS303", "CS307"],
+    "DCS": ["CS205" , "CS201", "MA201", "CS204", "CS208", "CS303", "CS307"],
+    "LACA": ["CS205" , "CS201", "MA201", "CS204", "CS208", "CS303", "CS307"],
+    "OS": ["CS205" , "CS201", "MA201", "CS204", "CS208", "CS303", "CS307"],
+    "PDD": ["CS205" , "CS201", "MA201", "CS204", "CS208", "CS303", "CS307"],
+    "SS": ["CS205" , "CS201", "MA201", "CS204", "CS208", "CS303", "CS307"],
+    "DC": ["CS205" , "CS201", "MA201", "CS204", "CS208", "CS303", "CS307"]
+  },
+   "ECE": {
+     "NT": ["EC201" ,"EC205", "EC204", "EC301", "EC306", "EC401"],
+    "EC":  ["EC201" ,"EC205", "EC204", "EC301", "EC306", "EC401"],
+    "AIC":  ["EC201" ,"EC205", "EC204", "EC301", "EC306", "EC401"],
+    "DSP":  ["EC201" ,"EC205", "EC204", "EC301", "EC306", "EC401"],
+    "OOPS":  ["EC201" ,"EC205", "EC204", "EC301", "EC306", "EC401"],
+    "ITC":  ["EC201" ,"EC205", "EC204", "EC301", "EC306", "EC401"]
+  },
+
+  "EEE": {
+     "DELD": ["EE201" ,"EE205", "EE206", "EE208", "EE303", "EE305" ],
+    "SIM": ["EE201" ,"EE205", "EE206", "EE208", "EE303", "EE305" ],
+    "MS": ["EE201" ,"EE205", "EE206", "EE208", "EE303", "EE305" ],
+    "MI": ["EE201" ,"EE205", "EE206", "EE208", "EE303", "EE305" ],
+    "LCS": ["EE201" ,"EE205", "EE206", "EE208", "EE303", "EE305" ],
+    "PE": ["EE201" ,"EE205", "EE206", "EE208", "EE303", "EE305" ],
+  },
+
+  "CE": {
+     "DCS": ["CE304" , "CE308", "CE401", "CE201", "CE409", "CE202"],
+    "TE-I": ["CE304" , "CE308", "CE401", "CE201", "CE409", "CE202"],
+    "DSS": ["CE304" , "CE308", "CE401", "CE201", "CE409", "CE202"],
+    "MOS": ["CE304" , "CE308", "CE401", "CE201", "CE409", "CE202"],
+    "QSV": ["CE304" , "CE308", "CE401", "CE201", "CE409", "CE202"],
+    "EG": ["CE304" , "CE308", "CE401", "CE201", "CE409", "CE202"],
+  },
+  "ME": {
+  "MOS": ["ME201", "ME301", "ME305", "ME403", "ME407"  ],
+  "MOM":["ME201", "ME301", "ME305", "ME403", "ME407"  ],
+  "CPNM":["ME201", "ME301", "ME305", "ME403", "ME407"  ],
+  "AEE": ["ME201", "ME301", "ME305", "ME403", "ME407"  ],
+  "Mechatronics": ["ME201", "ME301", "ME305", "ME403", "ME407"  ]
+}
+}
+window.onload = function() {
+  var subjectSel = document.getElementById("subject");
+  var topicSel = document.getElementById("topic");
+  var chapterSel = document.getElementById("chapter");
+  for (var x in subjectObject) {
+    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+  }
+  subjectSel.onchange = function() {
+    //empty Chapters- and Topics- dropdowns
+    chapterSel.length = 1;
+    topicSel.length = 1;
+    //display correct values
+    for (var y in subjectObject[this.value]) {
+      topicSel.options[topicSel.options.length] = new Option(y, y);
+    }
+  }
+  topicSel.onchange = function() {
+    //empty Chapters dropdown
+    chapterSel.length = 1;
+    //display correct values
+    var z = subjectObject[subjectSel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+}
+
+</script>
+</body>
+{% endblock  %}

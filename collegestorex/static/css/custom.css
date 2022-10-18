@@ -1,0 +1,9 @@
+body{
+    background: linear -gradient(90deg, #000 60%, #808080 20%, #000 20%);
+}
+#text1{
+    color: red;
+}
+.navbar-brand{
+color: red;
+}
